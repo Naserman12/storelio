@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Scopes\StoreScope;
+
+use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -14,7 +15,7 @@ class Product extends Model
     ];
     protected static function booted()
     {
-        static::addGlobalScope(new StoreScope);
+        static::addGlobalScope(new StoreScope());
     }
 
     public function store()

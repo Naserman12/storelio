@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->nullable();
             $table->enum('role', ['admin','owner','employee','customer'])->default('customer');
-            $table->foreignId('store_id')->nullable()->constrained('stores');
+
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

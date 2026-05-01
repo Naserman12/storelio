@@ -9,16 +9,17 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password'])]
+// #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
     protected $fillable = [
-        'name','phone',
-        'role','store_id'
+        'name','phone','email','password',
+        'role','store_id',
     ];
     /**
      * Get the attributes that should be cast.
@@ -32,15 +33,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-     public function store()
-    {
-        return $this->belongsTo(Store::class);
-    }
+    //  public function store()
+    // {
+    //     return $this->belongsTo(Store::class);
+    // }
 
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
+    public function stores()
+    {
+        return $this->hasMany(Store::class, 'owner_id');
+    }
+
 
     public function carts()
     {

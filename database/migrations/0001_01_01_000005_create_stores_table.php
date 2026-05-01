@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
 
-            $table->foreignId('owner_id')->nullable()->constrained('users');
+            $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete()->unique();
 
             $table->boolean('is_active')->default(true);
 
