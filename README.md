@@ -1,59 +1,291 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# 🏪 Storelio - SaaS Multi-Vendor E-commerce Platform
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Storelio is a **multi-tenant SaaS e-commerce platform** built with Laravel, allowing users to create and manage their own online stores with full isolation, scalability, and customization.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+It provides a complete backend API for building modern e-commerce applications (Web / Mobile / SPA).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+# 🚀 Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 👤 Authentication & Roles
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Secure API authentication using **Laravel Sanctum**
+* Role-based access control:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+  * `super_admin`
+  * `store_owner`
+  * `employee`
+  * `customer`
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🏪 Multi-Tenant Stores
+
+* Each user (store owner) can create a dedicated store
+* Full data isolation per store
+* Store ownership via `owner_id`
+* Ready for SaaS scaling
+
+---
+
+## 📦 Product Management
+
+* Create, update, delete products
+* Auto-assign products to current store
+* Support for:
+
+  * Price
+  * Quantity
+  * Description
+  * Images
+* Extensible for variants & discounts
+
+---
+
+## 🗂️ Categories System
+
+* Store-based categories
+* Assign products to categories
+* Filter products by category
+* Organized catalog structure
+
+---
+
+## 🛒 Cart System
+
+* User-based shopping cart
+* Add / update / remove items
+* Quantity management
+* Automatic cart creation per store
+
+---
+
+## 🧾 Orders System
+
+* Convert cart into orders (Checkout)
+* Store order items snapshot
+* Order status tracking:
+
+  * pending
+  * paid
+  * shipped
+  * completed
+  * cancelled
+* Automatic cart clearing after order creation
+
+---
+
+## 💳 Payments System
+
+* Multiple payment methods:
+
+  * Cash on Delivery (COD)
+  * Bank Transfer
+  * Card (ready for gateway integration)
+* Payment tracking per order
+* Transaction ID support
+* Automatic order status update
+
+---
+
+## ⚙️ Settings System
+
+* Flexible key-value settings per store
+* Fully dynamic configuration
+* Examples:
+
+  * Store name
+  * Currency
+  * Tax settings
+  * Theme configuration
+
+---
+
+## 🎨 Theme System
+
+* Multiple store themes support:
+
+  * Default
+  * Modern
+  * Dark
+  * Minimal
+* Theme stored in settings (no code changes required)
+* Fully dynamic UI customization ready
+
+---
+
+## 📊 Dashboard API
+
+* Store analytics endpoints:
+
+  * Total products
+  * Total orders
+  * Total sales
+  * Customers count
+* Latest orders overview
+* Ready for frontend dashboards (Vue / React)
+
+---
+
+# 🏗️ Tech Stack
+
+* **Backend:** Laravel 10+
+* **Auth:** Laravel Sanctum
+* **Database:** MySQL
+* **Architecture:** RESTful API
+* **Design Pattern:** Multi-Tenant SaaS Architecture
+* **Scope:** Store-based data isolation
+
+---
+
+# 🧠 Architecture Overview
+
+* Multi-Tenant SaaS design
+* Store isolation using `store_id`
+* Role-based access control
+* Settings-driven configuration
+* Modular API structure
+
+---
+
+# 📂 Project Modules
+
+* Authentication
+* Stores Management
+* Products
+* Categories
+* Cart
+* Orders
+* Payments
+* Settings
+* Themes
+* Dashboard Analytics
+
+---
+
+# 🚀 Getting Started
+
+### 1. Clone repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/your-username/storelio.git
+cd storelio
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+### 2. Install dependencies
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Environment setup
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### 4. Run migrations
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# storelio" 
+```bash
+php artisan migrate
+```
+
+---
+
+### 5. Start server
+
+```bash
+php artisan serve
+```
+
+---
+
+# 🔐 API Authentication
+
+Use Laravel Sanctum:
+
+```
+Authorization: Bearer YOUR_TOKEN
+```
+
+---
+
+# 📊 Example API Endpoints
+
+## Auth
+
+```
+POST /api/register
+POST /api/login
+POST /api/logout
+```
+
+## Products
+
+```
+GET    /api/products
+POST   /api/products
+PUT    /api/products/{id}
+DELETE /api/products/{id}
+```
+
+## Orders
+
+```
+POST /api/orders
+GET  /api/orders
+```
+
+## Cart
+
+```
+POST /api/cart/add
+GET  /api/cart
+```
+
+---
+
+# 🎯 Project Goal
+
+Storelio aims to be a **scalable SaaS platform for e-commerce**, similar to Shopify, enabling users to:
+
+* Launch online stores quickly
+* Manage products and orders easily
+* Customize store appearance
+* Scale without technical complexity
+
+---
+
+# 🔥 Future Improvements
+
+* Stripe / PayPal integration
+* Subscription billing system
+* Advanced analytics dashboard
+* Multi-store switching
+* Mobile App API support
+* Webhooks system
+* Admin panel for SaaS owner
+
+---
+
+# 👨‍💻 Author
+
+Developed as a full SaaS learning + production project using Laravel API architecture.
+
+---
+
+# ⭐ If you like this project
+
+Give it a star ⭐ on GitHub and contribute to its growth.
+---
