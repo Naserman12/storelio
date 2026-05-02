@@ -13,11 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
+    // مهم لعمل HTTPS خلف Proxy مثل Railway
+         $middleware->trustProxies(at: '*');
+         // مهم لعمل Sanctum بشكل صحيح
+        $middleware->statefulApi();
         // 🔐 Sanctum
         $middleware->api(append: [
-            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-
-            // 🔥 أهم سطر
+             // API middleware الخاص بك فقط
             \App\Http\Middleware\IdentifyStore::class,
         ]);
 
