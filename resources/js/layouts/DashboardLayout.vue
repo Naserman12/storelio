@@ -6,7 +6,7 @@
       <h1 class="text-xl font-bold mb-6">Storelio</h1>
 
       <nav class="space-y-3">
-        <router-link to="/dashboard" class="block">📊 Dashboard</router-link>
+        <router-link to="/" class="block">📊 Dashboard</router-link>
         <router-link to="/products" class="block">📦 Products</router-link>
         <router-link to="/orders" class="block">🧾 Orders</router-link>
         <router-link to="/categories" class="block">🗂️ Categories</router-link>
