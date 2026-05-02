@@ -7,6 +7,7 @@
       <router-link to="/store">Home</router-link>
       <router-link to="/cart">Cart</router-link>
       <router-link to="#">Orders</router-link>
+      <router-link to="login">Login</router-link>
     </div>
 
     <div class="flex gap-3 items-center">

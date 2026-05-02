@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import api from '../lib/api'
+import api from '../../api/api'
 import { useRouter } from 'vue-router'
 
 const name = ref('')
