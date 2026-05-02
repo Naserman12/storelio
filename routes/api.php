@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AdminDashboardController;
+use App\Http\Controllers\Api\Admin\OrderManagementController;
+use App\Http\Controllers\Api\Admin\StoreManagementController;
+use App\Http\Controllers\Api\Admin\UserManagementController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
@@ -18,9 +22,9 @@ use App\Http\Controllers\Api\Store\ThemeController;
 | API Routes - Storelio SaaS
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth:sanctum')->get('/test', function () {
-    return auth()->user();
-});
+// Route::middleware('auth:sanctum')->get('/test', function () {
+//     return auth()->user();
+// });
 
 // // 🔐 Auth Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -44,6 +48,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/cart/clear', [CartController::class, 'clear']);
 
 });
+// Admin
+Route::prefix('admin')
+    ->middleware(['auth:sanctum', 'role:super_admin'])
+    ->group(function () {
+        
+        Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+
+        Route::get('/stores', [StoreManagementController::class, 'index']);
+        Route::patch('/stores/{id}/toggle', [StoreManagementController::class, 'toggle']);
+
+        Route::get('/users', [UserManagementController::class, 'index']);
+
+        Route::get('/orders', [OrderManagementController::class, 'index']);
+    });
 
 // // 👤 User (authenticated)
 Route::middleware('auth:sanctum')->group(function () {
