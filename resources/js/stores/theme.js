@@ -1,14 +1,29 @@
 import { defineStore } from 'pinia'
+import api from '../api/api'
 
 export const useThemeStore = defineStore('theme', {
   state: () => ({
-    theme: localStorage.getItem('theme') || 'light'
+    theme: 'light',
+    loaded: false
   }),
 
   actions: {
-    setTheme(t) {
-      this.theme = t
-      localStorage.setItem('theme', t)
+
+    // 🟢 جلب من السيرفر
+    async fetchTheme() {
+      const res = await api.get('/settings')
+      this.theme = res.data.theme || 'light'
+      this.loaded = true
+    },
+
+    // 🟢 تغيير الثيم
+    async setTheme(theme) {
+      this.theme = theme
+
+      await api.post('/settings', {
+        key: 'theme',
+        value: theme
+      })
     }
   }
 })

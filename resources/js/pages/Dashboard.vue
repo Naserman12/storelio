@@ -1,74 +1,91 @@
 <template>
   <div>
 
-    <!-- عنوان -->
     <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
 
-    <!-- الكروت -->
-    <div class="grid grid-cols-4 gap-6">
+    <!-- Loading -->
+    <div v-if="loading">Loading...</div>
 
-      <div class="bg-white p-5 rounded-xl shadow">
-        <p class="text-gray-500">Products</p>
-        <h2 class="text-2xl font-bold mt-2">120</h2>
+    <!-- Data -->
+    <div v-else>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-4 gap-6">
+
+        <div class="card">
+          <p>Products</p>
+          <h2>{{ stats.products_count }}</h2>
+        </div>
+
+        <div class="card">
+          <p>Orders</p>
+          <h2>{{ stats.orders_count }}</h2>
+        </div>
+
+        <div class="card">
+          <p>Sales</p>
+          <h2>{{ stats.total_sales }}</h2>
+        </div>
+
+        <div class="card">
+          <p>Customers</p>
+          <h2>{{ stats.customers_count }}</h2>
+        </div>
+
       </div>
 
-      <div class="bg-white p-5 rounded-xl shadow">
-        <p class="text-gray-500">Orders</p>
-        <h2 class="text-2xl font-bold mt-2">45</h2>
+      <!-- Latest Orders -->
+      <div class="mt-10 bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-bold mb-4">Latest Orders</h2>
+
+        <table class="w-full">
+          <thead>
+            <tr class="border-b">
+              <th>ID</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="order in stats.latest_orders" :key="order.id">
+              <td>#{{ order.id }}</td>
+              <td>{{ order.total }}</td>
+              <td :class="order.status === 'paid' ? 'text-green-500' : 'text-yellow-500'">{{ order.status }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="bg-white p-5 rounded-xl shadow">
-        <p class="text-gray-500">Sales</p>
-        <h2 class="text-2xl font-bold mt-2">$15,230</h2>
-      </div>
-
-      <div class="bg-white p-5 rounded-xl shadow">
-        <p class="text-gray-500">Customers</p>
-        <h2 class="text-2xl font-bold mt-2">30</h2>
-      </div>
-
-    </div>
-
-    <!-- آخر الطلبات -->
-    <div class="mt-10 bg-white p-6 rounded-xl shadow">
-      <h2 class="text-xl font-bold mb-4">Latest Orders</h2>
-
-      <table class="w-full text-left">
-        <thead>
-          <tr class="border-b">
-            <th class="py-2">Order ID</th>
-            <th>User</th>
-            <th>Total</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr class="border-b">
-            <td class="py-2">#1</td>
-            <td>Ali</td>
-            <td>$120</td>
-            <td class="text-green-500">Paid</td>
-          </tr>
-
-          <tr class="border-b">
-            <td class="py-2">#2</td>
-            <td>Ahmed</td>
-            <td>$80</td>
-            <td class="text-yellow-500">Pending</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
   </div>
 </template>
 
-<script >
+<script setup>
+import { ref, onMounted } from 'vue'
 import api from '../api/api'
 
-export async function getDashboard() {
-  const res = await api.get('/admin/dashboard')
-  return res.data
-}
+const stats = ref({})
+const loading = ref(true)
+
+onMounted(async () => {
+  try {
+    const res = await api.get('/dashboard')
+    stats.value = res.data
+  } catch (e) {
+    console.error(e)
+  } finally {
+    loading.value = false
+  }
+})
 </script>
+
+<style>
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+</style>

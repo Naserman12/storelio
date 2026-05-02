@@ -70,7 +70,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     
         // 🏪 Store Owner Routes
-        Route::middleware('role:owner')->group(function () {
+    Route::middleware('role:owner')->group(function () {
 
     // Settings
     Route::get('/settings', [SettingController::class, 'index']);
