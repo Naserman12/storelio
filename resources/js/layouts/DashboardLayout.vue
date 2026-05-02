@@ -33,7 +33,7 @@
       </header>
 
       <!-- Page Content -->
-      <main class="p-6 overflow-auto">
+      <main class="p-6 overflow-auto ">
         <router-view />
       </main>
 
