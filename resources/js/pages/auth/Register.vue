@@ -47,7 +47,8 @@ async function register() {
     await api.post('/register', {
       name: name.value,
       email: email.value,
-      password: password.value
+      password: password.value,
+      role: 'Owner',
     })
 
     router.push('/login')
