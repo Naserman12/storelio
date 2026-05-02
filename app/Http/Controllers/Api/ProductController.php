@@ -132,4 +132,12 @@ class ProductController extends Controller
             'message' => 'Deleted successfully'
         ]);
     }
+    // User Products
+    public function public()
+{
+    return Product::where('is_active', 1)
+        ->latest()
+        ->get();
+}
+
 }

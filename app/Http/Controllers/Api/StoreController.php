@@ -41,6 +41,11 @@ class StoreController extends Controller
         ]);
     }
 
+    // User Store
+    public function public()
+    {
+        return Store::first();
+    }
     // 🟢 عرض المتجر الحالي
     public function show(Request $request)
     {

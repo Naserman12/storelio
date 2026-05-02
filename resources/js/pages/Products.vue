@@ -253,8 +253,15 @@ async function saveProduct() {
 
 // 🟢 حذف
 async function deleteProduct(id) {
-  await api.delete(`/products/${id}`)
-  fetchData()
+  if (!window.confirm('⚠️ This action cannot be undone. Continue?')) return
+
+  try {
+    await api.delete(`/products/${id}`)
+    toast.success('Deleted successfully')
+    fetchData()
+  } catch (e) {
+    toast.error('Delete failed')
+  }
 }
 
 // 🟢 رفع صورة

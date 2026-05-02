@@ -30,6 +30,8 @@ use App\Http\Controllers\Api\Store\ThemeController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/public/products', [ProductController::class, 'public']);
+Route::get('/public/store', [StoreController::class, 'public']);
 // Cart
 Route::middleware(['auth:sanctum'])->group(function () {
     // Orders

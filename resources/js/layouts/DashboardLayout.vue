@@ -8,9 +8,9 @@
       <nav class="space-y-3">
         <router-link to="/dashboard" class="block">📊 Dashboard</router-link>
         <router-link to="/products" class="block">📦 Products</router-link>
-        <router-link to="/" class="block">🧾 Orders</router-link>
-        <router-link to="/" class="block">🗂️ Categories</router-link>
-        <router-link to="/" class="block">⚙️ Settings</router-link>
+        <router-link to="/orders" class="block">🧾 Orders</router-link>
+        <router-link to="/categories" class="block">🗂️ Categories</router-link>
+        <router-link to="/settings" class="block">⚙️ Settings</router-link>
       </nav>
     </aside>
 
