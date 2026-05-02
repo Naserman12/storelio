@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class StoreController extends Controller
@@ -16,7 +17,7 @@ class StoreController extends Controller
             'name' => 'required|string'
         ]);
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         if ($user->role !== 'owner') {
             return response()->json([
