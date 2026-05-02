@@ -6,6 +6,7 @@
         "build": "vite build",
         "dev": "vite"
     },
+ 
    "dependencies": {
     "@vitejs/plugin-vue": "^6.0.6",
     "axios": "^1.15.2",
