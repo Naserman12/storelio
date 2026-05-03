@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white shadow px-4 py-3 flex justify-between items-center">
+  <nav class="bg-white shadow px-4 py-3 flex justify-between items-center ">
 
     <div class="font-bold text-lg">Storelio</div>
 
