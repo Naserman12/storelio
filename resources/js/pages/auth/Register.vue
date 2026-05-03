@@ -44,15 +44,17 @@ const router = useRouter()
 
 async function register() {
   try {
-    await api.post('/register', {
+    const res = await api.post('/register', {
       name: name.value,
       email: email.value,
       password: password.value,
       role: 'owner'
     })
 
+     console.log('REGISTER RESPONSE:', res.data);
+     localStorage.setItem('token', res.data.token)
      // 🔥 نرسله لصفحة إنشاء متجر
-    // router.push('/create-store')
+    router.push('/create-store')
 
   } catch (e) {
     error.value = 'Registration failed';

@@ -54,7 +54,7 @@ async function login() {
     localStorage.setItem('token', res.data.token)
 
     // تحويل للداشبورد
-    // router.push('/')
+    router.push('/')
 
   } catch (err) {
     error.value = 'Invalid credentials'
