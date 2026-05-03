@@ -48,7 +48,7 @@ async function register() {
       name: name.value,
       email: email.value,
       password: password.value,
-      role: 'Owner',
+      role: 'owner',
     })
 
     router.push('/login')

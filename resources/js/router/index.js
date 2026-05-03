@@ -13,15 +13,19 @@ import Settings from '../pages/Settings.vue'
 import StoreFront from '../pages/StoreFront.vue'
 import Cart from '../pages/Cart.vue'
 import Register from '../pages/auth/Register.vue'
+import Landing from '../pages/Landing.vue'
 
 const routes = [
   { path: '/register', component: Register },
   { path: '/login', component: Login },
   { path: '/store', component: StoreFront},
   { path: '/cart', component: Cart},
+    {path: '/',
+    component: Landing,},
   {
-    path: '/',
-    component: DashboardLayout,
+    path: '/dashboard',
+    component: Dashboard,
+    
     children: [
       { path: '', component: Dashboard },
       { path: 'products', component: Products },
