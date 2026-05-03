@@ -84,8 +84,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/theme', [ThemeController::class, 'show']);
     Route::post('/theme', [ThemeController::class, 'update']);
             // Stors
-            Route::get('/store', [StoreController::class, 'show']);
-            Route::post('/store', [StoreController::class, 'store']);
+            Route::get('/stores', [StoreController::class, 'show']);
+            Route::post('/stores', [StoreController::class, 'store']);
     
             // Products
              Route::apiResource('products', ProductController::class);
