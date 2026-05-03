@@ -42,13 +42,14 @@ const password = ref('')
 const error = ref('')
 const router = useRouter()
 
+
 async function login() {
   try {
     const res = await api.post('/login', {
       email: email.value,
       password: password.value
     })
-
+    
     // حفظ التوكن
     localStorage.setItem('token', res.data.token)
 
