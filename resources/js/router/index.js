@@ -68,9 +68,11 @@ router.beforeEach(async (to, from, next) => {
     } catch (e) {
       // إذا التوكن خرب
       localStorage.removeItem('token')
-      return next('/login')
       console.log('Error index Failed',e)
+      return next('/login')
     }
   }
+  next()
+
 })
 export default router
