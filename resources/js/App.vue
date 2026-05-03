@@ -2,12 +2,11 @@
 import { onMounted } from 'vue'
 import { useThemeStore } from './stores/theme'
 import Login from './pages/auth/Login.vue'
-import { useToastStore } from './stores/toast'
+import { toastState } from './stores/toast'
 import Navbar from './components/Navbar.vue'
 
 
 const isLoggedIn = !!localStorage.getItem('token')
-const toast = useToastStore()
 const themeStore = useThemeStore()
 
 onMounted(() => {
@@ -18,9 +17,15 @@ onMounted(() => {
 <template>
   <Navbar/>
   <router-view />
-    <div
-    v-if="toast.show"
-    class="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow"
+  <div
+    v-for="toast in toastState.toasts"
+    :key="toast.id"
+    :class="[
+      'fixed bottom-5 right-5 text-white px-4 py-2 rounded shadow z-50',
+      toast.type === 'success' ? 'bg-green-500' : 
+      toast.type === 'error' ? 'bg-red-500' : 
+      'bg-blue-500'
+    ]"
   >
     {{ toast.message }}
   </div>

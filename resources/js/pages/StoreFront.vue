@@ -49,9 +49,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import api from '../api/api'
-import { useToastStore } from '../stores/toast'
-
-const toast = useToastStore()
+import { showToast } from '../stores/toast'
 
 const products = ref([])
 const store = ref({})
@@ -73,7 +71,7 @@ async function addToCart(product) {
     product_id: product.id,
     quantity: 1
   })
-  toast.success('Added to cart 🛒')
+  showToast('Added to cart 🛒', 'success')
 }
 
 onMounted(fetchData)

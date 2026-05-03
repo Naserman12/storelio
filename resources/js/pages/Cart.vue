@@ -50,9 +50,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import api from '../api/api'
-import { useToastStore } from '../stores/toast'
-
-const toast = useToastStore()
+import { showToast } from '../stores/toast'
 
 const cart = ref(null)
 
@@ -65,14 +63,14 @@ async function fetchCart() {
 // 🟢 حذف عنصر
 async function remove(id) {
   await api.delete(`/cart/item/${id}`)
-  toast.success('Removed')
+  showToast('Removed', 'success')
   fetchCart()
 }
 
 // 🟢 تفريغ
 async function clearCart() {
   await api.post('/cart/clear')
-  toast.success('Cart cleared')
+  showToast('Cart cleared', 'success')
   fetchCart()
 }
 

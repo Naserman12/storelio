@@ -118,8 +118,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { showToast } from '../stores/toast'
+import { ref, reactive, onMounted } from 'vue'
+import { showToast } from '../../stores/toast'
+import api from '../../api/api'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+onMounted(() => {
+  loadProfile()
+})
 
 const avatarPreview = ref(null)
 const defaultAvatar = 'https://i.pravatar.cc/100'

@@ -32,9 +32,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import api from '../api/api'
-import { useToastStore } from '../stores/toast'
-
-const toast = useToastStore()
+import { showToast } from '../stores/toast'
 
 const settings = ref({
   store_name: '',
@@ -54,7 +52,7 @@ async function save() {
     })
   }
 
-  toast.success('Settings saved')
+  showToast('Settings saved', 'success')
 }
 
 onMounted(fetchSettings)

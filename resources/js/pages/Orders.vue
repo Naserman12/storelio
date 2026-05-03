@@ -116,9 +116,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import api from '../api/api'
-import { useToastStore } from '../stores/toast'
-
-const toast = useToastStore()
+import { showToast } from '../stores/toast'
 
 const orders = ref([])
 const selectedOrder = ref(null)
@@ -140,7 +138,7 @@ async function updateStatus() {
     status: selectedOrder.value.status
   })
 
-  toast.success('Order updated')
+  showToast('Order updated', 'success')
   selectedOrder.value = null
   fetchOrders()
 }

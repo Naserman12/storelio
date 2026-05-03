@@ -76,9 +76,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import api from '../api/api'
-import { useToastStore } from '../stores/toast'
-
-const toast = useToastStore()
+import { showToast } from '../stores/toast'
 
 const categories = ref([])
 const showForm = ref(false)
@@ -112,10 +110,10 @@ function openForm(cat = null) {
 async function save() {
   if (isEdit.value) {
     await api.put(`/categories/${form.value.id}`, form.value)
-    toast.success('Updated')
+    showToast('Updated', 'success')
   } else {
     await api.post('/categories', form.value)
-    toast.success('Created')
+    showToast('Created', 'success')
   }
 
   showForm.value = false
@@ -125,7 +123,7 @@ async function save() {
 // 🔴 حذف
 async function deleteCategory(id) {
   await api.delete(`/categories/${id}`)
-  toast.success('Deleted')
+  showToast('Deleted', 'success')
   fetchCategories()
 }
 

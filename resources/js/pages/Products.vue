@@ -164,10 +164,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import api from '../api/api'
-import { useToastStore } from '../stores/toast'
-
-const toast = useToastStore()
-
+import { showToast } from '../stores/toast'
 
 const products = ref([])
 const categories = ref([])
@@ -257,10 +254,10 @@ async function deleteProduct(id) {
 
   try {
     await api.delete(`/products/${id}`)
-    toast.success('Deleted successfully')
+    showToast('Deleted successfully', 'success')
     fetchData()
   } catch (e) {
-    toast.error('Delete failed')
+    showToast('Delete failed', 'error')
   }
 }
 
