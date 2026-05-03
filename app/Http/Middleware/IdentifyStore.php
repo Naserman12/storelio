@@ -10,14 +10,19 @@ class IdentifyStore
     public function handle(Request $request, Closure $next)
     {
         // example: store1.storelio.com
-        $host = $request->getHost(); 
-         // ⛔ تخطي IdentifyStore للدومين الرئيسي (Railway)
-        if ($host === 'storelio-production.up.railway.app/api'  || $host === 'storelio-production.up.railway.app') {
+        $host = $request->getHost();
+
+        // جلب الدومين الرئيسي من الإعدادات لاستثناءه
+        $appUrl = parse_url(config('app.url'), PHP_URL_HOST);
+        
+        // ⛔ تخطي IdentifyStore للدومين الرئيسي أو البيئة المحلية
+        $mainDomains = [$appUrl, 'localhost', '127.0.0.1', 'storelio-production.up.railway.app'];
+        if (in_array($host, $mainDomains)) {
             return $next($request);
         }
 
-        // ⛔ تخطي IdentifyStore لمسارات auth
-        if ($request->is('/register') || $request->is('/login')) {
+        // ⛔ تخطي IdentifyStore لمسارات auth (أضفنا api/ لأنها مسارات API)
+        if ($request->is('api/register') || $request->is('api/login') || $request->is('api/user')) {
             return $next($request);
         }
         

@@ -11,7 +11,7 @@
         <router-link to="/dashboard/orders" class="block">🧾 Orders</router-link>
         <router-link to="/dashboard/categories" class="block">🗂️ Categories</router-link>
         <router-link to="/dashboard/settings" class="block">⚙️ Settings</router-link>
-        <router-link to="/profile" class="block">⚙️ Settings</router-link>
+        <router-link to="/profile" class="block">  Profile</router-link>
       </nav>
     </aside>
 

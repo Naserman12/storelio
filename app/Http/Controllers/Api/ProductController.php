@@ -36,12 +36,15 @@ class ProductController extends Controller
                 'image' => 'nullable|image|max:2048',
                 ]);
                 
-                $store = StoreService::current(); 
+                // محاولة جلب المتجر من الوسيط، وإذا لم يوجد (لوحة التحكم) نجلب أول متجر يملكه المستخدم
+                $store = StoreService::current() ?: $request->user()->stores()->first();
+
                 if (!$store) {
                     return response()->json([
-                        'message' => 'Store not found for this user'
+                        'message' => 'You need to create a store first'
                         ], 400);
-                        }
+                }
+
              $data = $request->only([
                 'category_id',
                 'name',
@@ -52,10 +55,6 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('products', 'public');
             $data['image'] = $path;
-        }
-                // 🖼️ رفع الصورة
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('products', 'public');
         }
 
         // 🔗 slug
