@@ -52,7 +52,7 @@ async function register() {
     })
 
      // 🔥 نرسله لصفحة إنشاء متجر
-    router.push('/create-store')
+    // router.push('/create-store')
 
   } catch (e) {
     error.value = 'Registration failed';
