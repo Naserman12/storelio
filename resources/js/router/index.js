@@ -15,6 +15,7 @@ import Register from '../pages/auth/Register.vue'
 import Landing from '../pages/Landing.vue'
 import CreateStore from '../pages/CreateStore.vue'
 import DashboardLayout from '../layouts/DashboardLayout.vue'
+import Profile from '../pages/auth/Profile.vue'
 
 const routes = [
 
@@ -23,6 +24,7 @@ const routes = [
   { path: '/create-store', component: CreateStore },
   { path: '/store', component: StoreFront},
   { path: '/cart', component: Cart},
+  { path: '/profile', component: Profile},
     {path: '/',
     component: Landing,},
   {
