@@ -30,7 +30,6 @@ const routes = [
   {
     path: '/dashboard',
     component: DashboardLayout,
-    
     children: [
       { path: '', component: Dashboard },
       { path: 'products', component: Products },
