@@ -32,10 +32,13 @@ const name = ref('')
 const router = useRouter()
 
 async function createStore() {
-  await api.post('/stores', {
-    name: name.value
-  })
-
-  router.push('/')
+    try {
+        await api.post('/stores', {
+          name: name.value
+        })      
+        router.push('/dashboard')
+    } catch (error) {
+        console.log('Error Srore => ',error)
+    }
 }
 </script>
