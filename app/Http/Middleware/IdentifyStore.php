@@ -12,12 +12,12 @@ class IdentifyStore
         // example: store1.storelio.com
         $host = $request->getHost(); 
          // ⛔ تخطي IdentifyStore للدومين الرئيسي (Railway)
-        if ($host === 'storelio-production.up.railway.app') {
+        if ($host === 'storelio-production.up.railway.app/api'  || $host === 'storelio-production.up.railway.app') {
             return $next($request);
         }
 
         // ⛔ تخطي IdentifyStore لمسارات auth
-        if ($request->is('api/register') || $request->is('api/login')) {
+        if ($request->is('/register') || $request->is('/login')) {
             return $next($request);
         }
         

@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import api from '../api/api'
-import DashboardLayout from '../layouts/DashboardLayout.vue'
 
 import Dashboard from '../pages/Dashboard.vue'
 import Login from '../pages/auth/Login.vue'
@@ -15,6 +14,7 @@ import Cart from '../pages/Cart.vue'
 import Register from '../pages/auth/Register.vue'
 import Landing from '../pages/Landing.vue'
 import CreateStore from '../pages/CreateStore.vue'
+import DashboardLayout from '../layouts/DashboardLayout.vue'
 
 const routes = [
 
@@ -44,7 +44,7 @@ const router = createRouter({
   routes
 })
 router.beforeEach(async (to, from, next) => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token') || null
 
  // صفحات عامة (ما تحتاج تسجيل)
   const publicPages = ['/', '/login', '/register']
@@ -69,6 +69,7 @@ router.beforeEach(async (to, from, next) => {
       // إذا التوكن خرب
       localStorage.removeItem('token')
       return next('/login')
+      console.log('Error index Failed',e)
     }
   }
 })
