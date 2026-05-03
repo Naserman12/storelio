@@ -9,21 +9,28 @@ class IdentifyStore
 {
     public function handle(Request $request, Closure $next)
     {
-        // $host = $request->getHost(); 
         // example: store1.storelio.com
+        $host = $request->getHost(); 
+         // ⛔ تخطي IdentifyStore للدومين الرئيسي (Railway)
+        if ($host === 'storelio-production.up.railway.app') {
+            return $next($request);
+        }
 
-        // $subdomain = explode('.', $host)[0];
+        // ⛔ تخطي IdentifyStore لمسارات auth
+        if ($request->is('api/register') || $request->is('api/login')) {
+            return $next($request);
+        }
+        
+        $subdomain = explode('.', $host)[0];
 
-        // $store = Store::where('slug', $subdomain)->first();
-         $store = Store::first();
+        $store = Store::where('slug', $subdomain)->first();
 
         if (!$store) {
             abort(404, 'Store not found');
         }
 
         // نخزن المتجر في الطلب
-        // $request->merge(['current_store' => $store]);
-
+        $request->merge(['current_store' => $store]);
         app()->instance('current_store', $store);
 
         return $next($request);

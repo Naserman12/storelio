@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import api from '../api/api'
 import DashboardLayout from '../layouts/DashboardLayout.vue'
 
 import Dashboard from '../pages/Dashboard.vue'
@@ -14,17 +14,20 @@ import StoreFront from '../pages/StoreFront.vue'
 import Cart from '../pages/Cart.vue'
 import Register from '../pages/auth/Register.vue'
 import Landing from '../pages/Landing.vue'
+import CreateStore from '../pages/CreateStore.vue'
 
 const routes = [
+
   { path: '/register', component: Register },
   { path: '/login', component: Login },
+  { path: '/create-store', component: CreateStore },
   { path: '/store', component: StoreFront},
   { path: '/cart', component: Cart},
     {path: '/',
     component: Landing,},
   {
     path: '/dashboard',
-    component: Dashboard,
+    component: DashboardLayout,
     
     children: [
       { path: '', component: Dashboard },
@@ -35,7 +38,35 @@ const routes = [
     ]
   }
 ]
+router.beforeEach(async (to, from, next) => {
+  const token = localStorage.getItem('token')
 
+ // صفحات عامة (ما تحتاج تسجيل)
+  const publicPages = ['/', '/login', '/register']
+
+  if (!token && !publicPages.includes(to.path)) {
+    return next('/login')
+  }
+
+  if (token) {
+    try {
+      // تحقق من وجود متجر
+      const res = await api.get('/store')
+      // إذا ما عنده متجر → حوله لإنشاء متجر
+      if (!res.data.store && to.path !== '/create-store') {
+        return next('/create-store')
+      }
+      // إذا عنده متجر وهو في create-store → رجعه للداشبورد
+      if (res.data.store && to.path === '/create-store') {
+        return next('/dashboard')
+      }
+    } catch (e) {
+      // إذا التوكن خرب
+      localStorage.removeItem('token')
+      return next('/login')
+    }
+  }
+})
 export default createRouter({
   history: createWebHistory(),
   routes

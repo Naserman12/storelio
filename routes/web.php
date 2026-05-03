@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('app');
 // });
 Route::get('/{any}', function () {
-    return view('app'); // أو welcome إذا تستخدمه
+    return view('app'); 
 })->where('any', '.*');
 

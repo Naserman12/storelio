@@ -48,13 +48,15 @@ async function register() {
       name: name.value,
       email: email.value,
       password: password.value,
-      role: 'owner',
+      role: 'owner'
     })
 
-    router.push('/login')
+     // 🔥 نرسله لصفحة إنشاء متجر
+    router.push('/create-store')
 
   } catch (e) {
-    error.value = 'Registration failed'
+    error.value = 'Registration failed';
+    console.log('Error Registration', e);
   }
 }
 </script>
