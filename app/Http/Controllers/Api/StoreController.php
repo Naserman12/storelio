@@ -50,8 +50,11 @@ class StoreController extends Controller
     // 🟢 عرض المتجر الحالي
     public function show(Request $request)
     {
+        $user = $request->user();
+        $store = $user->stores()->first(); // Get the first store owned by the user
+        
         return response()->json([
-            'store' => $request->user()->store
+            'store' => $store
         ]);
     }
 }

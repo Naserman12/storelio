@@ -54,7 +54,7 @@ async function register() {
      console.log('REGISTER RESPONSE:', res.data);
      localStorage.setItem('token', res.data.token)
      // 🔥 نرسله لصفحة إنشاء متجر
-
+     router.push('/create-store')
   } catch (e) {
     error.value = 'Registration failed';
     console.log('Error Registration', e);

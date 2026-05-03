@@ -56,7 +56,7 @@ router.beforeEach(async (to, from, next) => {
   if (token) {
     try {
       // تحقق من وجود متجر
-      const res = await api.get('/store')
+      const res = await api.get('/stores')
       // إذا ما عنده متجر → حوله لإنشاء متجر
       if (!res.data.store && to.path !== '/create-store') {
         return next('/create-store')
